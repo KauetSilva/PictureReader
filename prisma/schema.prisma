@@ -1,0 +1,22 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Measure {
+  id              Int      @id @default(autoincrement())
+  measure_uuid    String   @unique
+  measure_type    String
+  measure_datetime DateTime
+  measure_value   Int
+  image_url       String
+  has_confirmed   Boolean  @default(false)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  customer_code   String
+}
